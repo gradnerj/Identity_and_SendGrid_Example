@@ -8,10 +8,6 @@ namespace SendGridExample.Services.Models {
         private string user = "JaneDoe"; // The name you want to show up on your email
         private string key = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
 
-        public AuthSenderOptions() {
-            key = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
-        }
-        //BitsRUsAPIKEY
         public string SendGridUser { get { return user; } }
 
         
