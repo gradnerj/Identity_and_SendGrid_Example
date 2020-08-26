@@ -92,6 +92,7 @@ public class EmailSender : IEmailSender {
 ```
 using WebApp1.Services.Models;
 using Microsoft.Extensions.Options;
+using SendGrid.Helpers.Mail;
 ```
 12. Modify AuthSenderOptions.cs to look like: 
 ```
