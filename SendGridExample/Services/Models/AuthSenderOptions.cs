@@ -5,12 +5,16 @@ using System.Threading.Tasks;
 
 namespace SendGridExample.Services.Models {
    public class AuthSenderOptions {
-        private string user = "<YourUser>";
-        private string key = "<YourKey>";
+        private string user = "JaneDoe"; // The name you want to show up on your email
+        private string key = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+
+        public AuthSenderOptions() {
+            key = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+        }
         //BitsRUsAPIKEY
         public string SendGridUser { get { return user; } }
 
-        //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
+        
         public string SendGridKey { get { return key; } }
     }
 }
