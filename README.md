@@ -22,9 +22,47 @@ This document is to serve as an example and guide to getting started with Razor 
 
 For the next step you can search for the Package Manager Console with (Ctrl + Q). In the PMC run the following
 
-5. `PM> Update-Database`
+6. `PM> Update-Database`
+7. Configure the defaults for Identity Services. Add the following lines in the ConfigureServices function found in Startup.cs
+```
+services.Configure<IdentityOptions>(options =>
+    {
+        // Password settings.
+        options.Password.RequireDigit = true;
+        options.Password.RequireLowercase = true;
+        options.Password.RequireNonAlphanumeric = true;
+        options.Password.RequireUppercase = true;
+        options.Password.RequiredLength = 6;
+        options.Password.RequiredUniqueChars = 1;
 
-At this point you should be able to register users and login. That's all that's needed to get started with SendGrid.  
+        // Lockout settings.
+        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+        options.Lockout.MaxFailedAccessAttempts = 5;
+        options.Lockout.AllowedForNewUsers = true;
+
+        // User settings.
+        options.User.AllowedUserNameCharacters =
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+        options.User.RequireUniqueEmail = false;
+    });
+
+    services.ConfigureApplicationCookie(options =>
+    {
+        // Cookie settings
+        options.Cookie.HttpOnly = true;
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+        options.LoginPath = "/Identity/Account/Login";
+        options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+        options.SlidingExpiration = true;
+    });
+
+```
+
+At this point you should be able to register users and login. 
+
+<b>Before moving on to the next section</b> Register a user and confirm their email via the link displayed. Then, verify that you can log on with that user.
+That's all that's needed before moving forward to get started with SendGrid.  
 
 ## Get Started With SendGrid
 
@@ -123,7 +161,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using WebApp1.Services.Models;
 ```
 
-Done! Run the application and navigate to Login. Select Forgot Password and enter your email. 
+Done! Run the application and navigate to Login. Select Forgot Password and enter the email of the account you created earlier or an email for an account
+that already exisited. 
 
   
 ### Technologies
