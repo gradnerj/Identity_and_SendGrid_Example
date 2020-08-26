@@ -12,6 +12,9 @@ using SendGridExample.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using SendGridExample.Services;
+using SendGridExample.Services.Models;
 
 namespace SendGridExample {
     public class Startup {
@@ -29,6 +32,9 @@ namespace SendGridExample {
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
+
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthSenderOptions>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
