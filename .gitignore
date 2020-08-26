@@ -1,2 +1,5 @@
-.vs/
-*.sln
+bin/
+obj/
+*.vs/
+*.suo
+*.user
