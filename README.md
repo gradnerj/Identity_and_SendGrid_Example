@@ -115,7 +115,12 @@ public void ConfigureServices(IServiceCollection services) {
             services.Configure<AuthSenderOptions>(Configuration);
         }
 ```
-
+14. Also in Startup.cs, add the following imports
+```
+using WebApp1.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using WebApp1.Services.Models;
+```
 
 Done! Run the application and navigate to Login. Select Forgot Password and enter your email. 
 
