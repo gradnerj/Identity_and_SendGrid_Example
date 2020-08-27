@@ -21,7 +21,7 @@ namespace SendGridExample.Services {
         public Task Execute(string apiKey, string subject, string message, string email) {
             var client = new SendGrid.SendGridClient(apiKey);
             var msg = new SendGridMessage() {
-                From = new EmailAddress("BitsRUsLMS@gmail.com", Options.SendGridUser),
+                From = new EmailAddress("SendGridExample@gmail.com", Options.SendGridUser),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message
